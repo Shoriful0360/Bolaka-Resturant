@@ -8,7 +8,7 @@ const OurShop = () => {
     const location=useLocation()
     const [searchParams]=useSearchParams()
     // const title=searchParams.get('title')
-console.log(title)
+
     return (
         <div>
             {/*banner  */}

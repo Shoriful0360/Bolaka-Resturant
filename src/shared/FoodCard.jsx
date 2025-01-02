@@ -1,7 +1,66 @@
+import Swal from "sweetalert2";
+import UseAuthContext from "../hook/UseAuthContext";
+import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
+import useAxiosSecure from "../hook/useAxiosSecure";
+import toast from "react-hot-toast";
 
 
 const FoodCard = ({item}) => {
-    const{image,name,recipe,price}=item || {}
+  const{image,name,recipe,price,_id}=item || {}
+  const {user}=UseAuthContext()
+  const axiosSecure=useAxiosSecure()
+  const navigate=useNavigate()
+  const location=useLocation()
+    const handleAddToCard=async(food)=>{
+      if(user && user.email){
+        const cartItem={
+          menuId:_id,
+          email:user?.email,
+          name:name
+        }
+         
+     await axiosSecure.post('/addToCard',cartItem)
+     .then((res)=>{
+
+      if(res.data.insertedId){
+        Swal.fire({
+          position: "top-center",
+          icon: "success",
+          title: `${name} added to your card`,
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
+
+     })
+     .catch(()=>{
+      toast.error('something is wrong')
+     })
+       
+
+
+
+
+
+      }
+      else{
+        Swal.fire({
+          title: "You are not login !",
+          text: "Please login to add to the cart",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, login!"
+        }).then((result) => {
+          if (result.isConfirmed) {
+           
+            navigate('/login',{state:{from:location}})
+          }
+        });
+      }
+    }
     return (
         <div>
           <div className="card bg-base-100 w-[420px ] group relative shadow-xl">
@@ -19,7 +78,7 @@ const FoodCard = ({item}) => {
     <p>{recipe}</p>
     <span className="bg-slate-900 absolute text-white py-2 px-4 rounded-sm top-5 right-5 ">${price}</span>
     <div className="card-actions mt-6 justify-center">
-    <button className="btn group-hover:animate-bounce bg-[#E8E8E8] border-0 border-b-2 hover:text-[#BB8506]  text-[#BB8506] border-[#BB8506] uppercase hover:bg-[#111827]">Add To Card</button>
+    <button onClick={()=>handleAddToCard(item)} className="btn group-hover:animate-bounce bg-[#E8E8E8] border-0 border-b-2 hover:text-[#BB8506]  text-[#BB8506] border-[#BB8506] uppercase hover:bg-[#111827]">Add To Card</button>
     
     </div>
   </div>

@@ -8,18 +8,25 @@ import UseAuthContext from '../../hook/UseAuthContext';
 import { useForm } from "react-hook-form"
 import toast from 'react-hot-toast';
 import { Helmet } from 'react-helmet-async';
+import axios from 'axios';
 const SignUp = () => {
 
-    const {loginEmail,createUser}=UseAuthContext()
+    const {loginEmail,createUser,updateUserProfile}=UseAuthContext()
     const navigate=useNavigate()
-    // const {loginEmail}=useContext(AuthContext)
+
     const {
         register,handleSubmit,formState: { errors },} = useForm()
 
-    //   login with google
+    //   login with email and password
       const onSubmit = (data) => {
+        console.log(data)
+        const formData=data.photo.files[0]
+        const formDa=data.photo.File[0]
+        console.log('file from',formData)
+        console.log('file from',formDa)
         createUser(data?.email,data?.password)
         .then(()=>{
+          updateUserProfile(data?.name,data?.photoURL)
           toast.success('Sign Up is successfully') 
           navigate('/')
         })
@@ -27,6 +34,14 @@ const SignUp = () => {
             toast.error(err.message)
         })
     
+      }
+
+
+      // image upload
+      const handleImgUrl=async(img)=>{
+        const image=img
+        const{data}=await axios.post('https://api.imgbb.com/1/upload?key=04fba1d3a32105c7ac064c0493e350fb',image)
+        console.log(data)
       }
 
 
@@ -57,6 +72,14 @@ const SignUp = () => {
                     </label>
                     <input type="email" name='email'  {...register("email",{ required: true })} placeholder="email" className="input input-bordered w-full" required />
                     {errors.email?.type==='required' && <span className='text-red-500'>name is require</span>}
+                  </div>
+                  {/* photo url */}
+                  <div className="form-control w-full">
+                    <label className="label">
+                      <span className="label-text text-xl">Photo Url <span className='text-red-500'>*</span></span>
+                    </label>
+                    <input onChange={(e)=>handleImgUrl(e.target.value)} {...register("photo",{ required: true })} type="file" accept='image/*' className="file-input w-full " />
+                    {errors.photo?.type==='required' && <span className='text-red-500'>Please choose a photo</span>}
                   </div>
                   <div className="form-control">
                     <label className="label">

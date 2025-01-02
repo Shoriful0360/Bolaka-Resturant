@@ -5,13 +5,15 @@ import { VscGithub } from 'react-icons/vsc';
 import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
 import { useEffect, useState } from 'react';
 import UseAuthContext from '../../hook/UseAuthContext';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLoaderData, useLocation, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
 const Login = () => {
 const [visible,setVisible]=useState(true)
 const {loginWithGoogle,loginEmail}=UseAuthContext()
 const navigate=useNavigate()
+const location=useLocation()
+const from=location.state?.from?.pathname || '/'
 
   useEffect(()=>{
     loadCaptchaEnginge(6); 
@@ -28,7 +30,7 @@ const navigate=useNavigate()
     .then(res=>{
       console.log(res)
       toast.success('login is successfully')
-      navigate('/')
+      navigate(from)
     })
     .catch(()=>{
       toast.error('Invalid email or password')
@@ -42,7 +44,7 @@ const navigate=useNavigate()
     loginWithGoogle()
     .then(()=>{
      toast.success('login is successfully')
-     navigate('/')
+     navigate(from)
     })
     .catch (err=>{
       navigate(err.message)
