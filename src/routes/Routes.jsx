@@ -15,6 +15,7 @@ import AdminPrivate from "../Private Route/AdminPrivate";
 import UpdateItem from "../Pages/Dashboard/Admin/UpdateItem";
 import MyCart from "../Pages/Dashboard/Seller/MyCart";
 import Payment from "../Pages/Dashboard/Customer/Payment";
+import PaymentHistory from "../Pages/Dashboard/Customer/PaymentHistory";
 // import MyCart from "../Pages/Dashboard/Admin/Seller/MyCart";
 
 
@@ -80,17 +81,22 @@ export const router = createBrowserRouter([
                 loader: ({ params }) => fetch(`http://localhost:5000/menu/${params.id}`)
             },
 
-            // seller route
+
+            // customer route
             {
                 path: 'my_cart',
                 element: <MyCart></MyCart>
             },
 
-            // customer route
             {   
                 path:'payment',
                 element:<Payment></Payment>
+            },
+            {
+                path:'payment_history',
+                element:<PaymentHistory></PaymentHistory>
             }
+
         ]
     }
 ])

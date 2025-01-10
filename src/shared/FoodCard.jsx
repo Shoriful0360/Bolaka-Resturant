@@ -7,7 +7,7 @@ import useCards from "../hooks/useCards";
 
 
 const FoodCard = ({item}) => {
-  const{image,name,recipe,price,_id}=item || {}
+  const{image,name,recipe,price,_id,category}=item || {}
   const {user}=UseAuthContext()
   const axiosSecure=useAxiosSecure()
   const[,refetch]=useCards()
@@ -22,7 +22,8 @@ const FoodCard = ({item}) => {
           email:user?.email,
           name:name,
           price:price,
-          img:image
+          img:image,
+          category:category
         }
          
      await axiosSecure.post('/myCart',cartItem)

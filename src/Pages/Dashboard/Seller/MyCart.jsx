@@ -12,15 +12,15 @@ const totalPrice=cart.reduce((prev,item)=>prev+item.price,0)
         <div>
         <SectionTitle heading={'wanna add more?'} subHeading={'my cart'}></SectionTitle>
         </div>
-       <div className="flex justify-evenly">
+       <div className="flex my-4 justify-evenly">
        <h1 className="text-3xl font-semibold">Total orders: {cart.length}</h1>
         <h1 className="text-3xl font-semibold">Total price: ${totalPrice}</h1>
    {
     cart?.length?   <Link to={'/dashboard/payment'}>
-    <button className="btn">pay</button>
+    <button className="btn btn-secondary">pay</button>
     </Link>
     :
-    <button disabled className="btn">pay</button>
+    <button disabled className="btn ">pay</button>
    }
        </div>
        {/* table */}

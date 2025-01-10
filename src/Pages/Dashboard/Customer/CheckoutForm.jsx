@@ -4,12 +4,15 @@ import useAxiosSecure from "../../../hook/useAxiosSecure";
 import useCards from "../../../hooks/useCards";
 import UseAuthContext from "../../../hook/UseAuthContext";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 
 const CheckoutForm = () => {
     const[error,setError]=useState()
     const[transactionId,setTransactionId]=useState()
     const [clientSecret,setClientSecret]=useState()
+    const navigate=useNavigate()
+    const [visable,setVisiable]=useState(false)
     const stripe=useStripe();
     const elements=useElements()
     const{user}=UseAuthContext()
@@ -68,6 +71,9 @@ if(totalPrice>0){
             console.log('paymentIntents',paymentIntent)
             if(paymentIntent.status ==='succeeded'){
                 setTransactionId(paymentIntent.id)
+                toast.success('Payment have been succeeded')
+                setVisiable(true)
+                navigate('/dashboard/payment_history')
 
                 // now save the payment in database
                 const payment={
@@ -76,6 +82,7 @@ if(totalPrice>0){
                     date:new Date(),
                     cartIds:cart?.map(item=>item._id),
                     menuItemIds: cart?.map(item=>item.menuId),
+                    category: cart?.map(item=>item.category),
                     transactionId:paymentIntent.id,
                     status:'pending'
                 }
@@ -115,7 +122,7 @@ if(totalPrice>0){
         />
 {transactionId && <p className="text-green-600 mt-4">Transaction Id: {transactionId}</p>}
 
-        <button className="btn btn-secondary mt-4 " type="submit" disabled={!stripe || !clientSecret}>
+        <button disabled={visable} className="btn  mt-4 " type="submit" disabled={!stripe || !clientSecret}>
           Pay
         </button>
         <p className="text-red-500"> {error}</p>
