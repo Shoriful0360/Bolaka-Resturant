@@ -5,38 +5,92 @@ import Menu from "../Pages/Our Menu/Menu";
 import OurShop from "../Pages/Our shop/OurShop";
 import Login from "../Pages/Authentication/Login";
 import SignUp from "../Pages/Authentication/SignUp";
+import Dashboard from "../Layout/Dashboard";
+import Cart from "../Pages/Dashboard/Cart";
+import AllUsers from "../Pages/Dashboard/Admin/All Users/AllUsers";
+import AuthPrivate from "../Private Route/AuthPrivate";
+import AddItems from "../Pages/Dashboard/Admin/AddItems";
+import ManageItems from "../Pages/Dashboard/Admin/ManageItems";
+import AdminPrivate from "../Private Route/AdminPrivate";
+import UpdateItem from "../Pages/Dashboard/Admin/UpdateItem";
+import MyCart from "../Pages/Dashboard/Seller/MyCart";
+import Payment from "../Pages/Dashboard/Customer/Payment";
+// import MyCart from "../Pages/Dashboard/Admin/Seller/MyCart";
 
 
-export const router=createBrowserRouter([
-{
-    path:'/',
-    element:<MainLayout></MainLayout>,
-    children:[
-        {
-            path:'/',
-            element:<Home></Home>
-        },
-        {
-            path:'/menu',
-            element:<Menu></Menu>
-        },
-        {
-            path:'/shop/:title',
-            element:<OurShop></OurShop>
-        },
-        {
-            path:'/shop',
-            element:<OurShop></OurShop>
-        },
-        {}
-    ]
-},
-{
-    path:'/login',
-    element:<Login></Login>
-},
-{
-    path:'/signUp',
-    element:<SignUp></SignUp>
-}
+export const router = createBrowserRouter([
+    {
+        path: '/',
+        element: <MainLayout></MainLayout>,
+        children: [
+            {
+                path: '/',
+                element: <Home></Home>
+            },
+            {
+                path: '/menu',
+                element: <Menu></Menu>
+            },
+            {
+                path: '/shop/:title',
+                element: <OurShop></OurShop>
+            },
+            {
+                path: '/shop',
+                element: <OurShop></OurShop>
+            },
+            {}
+        ]
+    },
+    {
+        path: '/login',
+        element: <Login></Login>
+    },
+    {
+        path: '/signUp',
+        element: <SignUp></SignUp>
+    },
+    {
+        path: '/dashboard',
+        element: <AuthPrivate><Dashboard></Dashboard></AuthPrivate>,
+        children: [
+            {
+                path: 'cart',
+                element: <Cart></Cart>
+            },
+
+            // admin panal
+            // todo:add adminPrivate
+            {
+                path: 'users',
+                element: <AdminPrivate><AllUsers></AllUsers></AdminPrivate>
+            },
+            // todo:add adminPrivate
+            {
+                path: 'addItems',
+                element: <AdminPrivate><AddItems></AddItems></AdminPrivate>
+            },
+            {
+                path: 'manageItems',
+                element: <AdminPrivate><ManageItems></ManageItems></AdminPrivate>
+            },
+            {
+                path: 'update/:id',
+                element: <AdminPrivate><UpdateItem></UpdateItem></AdminPrivate>,
+                loader: ({ params }) => fetch(`http://localhost:5000/menu/${params.id}`)
+            },
+
+            // seller route
+            {
+                path: 'my_cart',
+                element: <MyCart></MyCart>
+            },
+
+            // customer route
+            {   
+                path:'payment',
+                element:<Payment></Payment>
+            }
+        ]
+    }
 ])

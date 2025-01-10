@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 const OurMenu = () => {
     const[menues]=useMenu()
-    const popular=menues.filter(item=>item.category==='popular')
+    const popular=menues?.filter(item=>item.category==='popular')
  
 
     return (
@@ -21,7 +21,7 @@ const OurMenu = () => {
             </section> 
             <div className="grid grid-cols-2 gap-10">
                 {
-                    popular.map((menu)=><PopularMenu menu={menu} key={menu._id}></PopularMenu>)
+                    popular?.map((menu)=><PopularMenu menu={menu} key={menu._id}></PopularMenu>)
                 }
             </div>
           <div className="text-center">

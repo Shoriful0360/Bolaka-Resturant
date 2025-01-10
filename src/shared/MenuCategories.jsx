@@ -7,7 +7,7 @@ const MenuCategories = ({menues,text,title}) => {
         <div>
          <div className="grid mt-10 grid-cols-2 gap-6">
          {
-            menues.map(menu=><PopularMenu key={menu._id} menu={menu}></PopularMenu>)
+            menues?.map(menu=><PopularMenu key={menu._id} menu={menu}></PopularMenu>)
           } 
             </div> 
            

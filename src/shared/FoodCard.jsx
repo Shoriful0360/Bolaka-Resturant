@@ -1,26 +1,31 @@
 import Swal from "sweetalert2";
 import UseAuthContext from "../hook/UseAuthContext";
 import { useLocation, useNavigate } from "react-router-dom";
-import axios from "axios";
 import useAxiosSecure from "../hook/useAxiosSecure";
 import toast from "react-hot-toast";
+import useCards from "../hooks/useCards";
 
 
 const FoodCard = ({item}) => {
   const{image,name,recipe,price,_id}=item || {}
   const {user}=UseAuthContext()
   const axiosSecure=useAxiosSecure()
+  const[,refetch]=useCards()
   const navigate=useNavigate()
   const location=useLocation()
+
+
     const handleAddToCard=async(food)=>{
       if(user && user.email){
         const cartItem={
           menuId:_id,
           email:user?.email,
-          name:name
+          name:name,
+          price:price,
+          img:image
         }
          
-     await axiosSecure.post('/addToCard',cartItem)
+     await axiosSecure.post('/myCart',cartItem)
      .then((res)=>{
 
       if(res.data.insertedId){
@@ -31,6 +36,8 @@ const FoodCard = ({item}) => {
           showConfirmButton: false,
           timer: 1500
         });
+        toast.success('success add to cart')
+        refetch()
       }
 
      })

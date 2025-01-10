@@ -28,7 +28,7 @@ const from=location.state?.from?.pathname || '/'
 
     loginEmail(email,password)
     .then(res=>{
-      console.log(res)
+    
       toast.success('login is successfully')
       navigate(from)
     })

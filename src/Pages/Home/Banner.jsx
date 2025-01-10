@@ -18,7 +18,7 @@ import img6 from '../../assets/home/06.png'
 const Banner = () => {
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
     return (
-        <div className='container mx-auto  ' >
+        <div className=' ' >
             <Swiper
         style={{
           '--swiper-navigation-color': '#fff',
@@ -33,35 +33,30 @@ const Banner = () => {
         className="mySwiper2 lg:h-[600px] h-[220px] w-full"
       >
         <SwiperSlide>
-          <img src={img1} />
+          <img className='w-full  object-cover object-center' src={img1} />
         </SwiperSlide>
         <SwiperSlide>
-        <img src={img2} />
+        <img className='w-full object-cover object-center' src={img2} />
         </SwiperSlide>
         <SwiperSlide>
-        <img src={img3} />
+        <img className='w-full object-cover object-center' src={img3} />
         </SwiperSlide>
         <SwiperSlide>
-        <img src={img4} />
+        <img className='w-full object-cover object-center' src={img4} />
         </SwiperSlide>
         <SwiperSlide>
-        <img src={img5} />
+        <img  className='w-full object-cover object-center'src={img5} />
         </SwiperSlide>
         <SwiperSlide>
-        <img src={img6} />
+        <img className='w-full object-cover object-center' src={img6} />
         </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-        </SwiperSlide>
+       
        
       </Swiper>
       <Swiper
         onSwiper={setThumbsSwiper}
         spaceBetween={10}
-        slidesPerView={8}
+        slidesPerView={6}
         freeMode={true}
         watchSlidesProgress={true}
         modules={[FreeMode, Navigation, Thumbs]}
@@ -84,12 +79,6 @@ const Banner = () => {
         </SwiperSlide>
         <SwiperSlide>
         <img src={img6} />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
         </SwiperSlide>
      
       </Swiper>  

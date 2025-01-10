@@ -18,15 +18,28 @@ const SignUp = () => {
         register,handleSubmit,formState: { errors },} = useForm()
 
     //   login with email and password
-      const onSubmit = (data) => {
-        console.log(data)
-        const formData=data.photo.files[0]
-        const formDa=data.photo.File[0]
-        console.log('file from',formData)
-        console.log('file from',formDa)
+      const onSubmit =async (data) => {
+        const image=data.photo[0]
+
+
+        const toBase64 = (file) => new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = () => resolve(reader.result.split(',')[1]); // Extract Base64 part
+          reader.onerror = (error) => reject(error);
+      });
+      const base64Image=await toBase64(image)
+   
+        const formData=new FormData()
+        formData.append('image',base64Image)
+
+        const result=await axios.post(`https://api.imgbb.com/1/upload?key=c3beac77e39c2a1951f67f329d3c6de5`,formData)
+
+     
+
         createUser(data?.email,data?.password)
         .then(()=>{
-          updateUserProfile(data?.name,data?.photoURL)
+          updateUserProfile(data?.name,result.data.data.display_url)
           toast.success('Sign Up is successfully') 
           navigate('/')
         })
@@ -38,11 +51,7 @@ const SignUp = () => {
 
 
       // image upload
-      const handleImgUrl=async(img)=>{
-        const image=img
-        const{data}=await axios.post('https://api.imgbb.com/1/upload?key=04fba1d3a32105c7ac064c0493e350fb',image)
-        console.log(data)
-      }
+    
 
 
 
@@ -71,14 +80,14 @@ const SignUp = () => {
                       <span className="label-text text-xl">Email <span className='text-red-500'>*</span></span>
                     </label>
                     <input type="email" name='email'  {...register("email",{ required: true })} placeholder="email" className="input input-bordered w-full" required />
-                    {errors.email?.type==='required' && <span className='text-red-500'>name is require</span>}
+                    {errors.email?.type==='required' && <span className='text-red-500'>email is require</span>}
                   </div>
                   {/* photo url */}
                   <div className="form-control w-full">
                     <label className="label">
                       <span className="label-text text-xl">Photo Url <span className='text-red-500'>*</span></span>
                     </label>
-                    <input onChange={(e)=>handleImgUrl(e.target.value)} {...register("photo",{ required: true })} type="file" accept='image/*' className="file-input w-full " />
+                    <input  {...register("photo",{ required: true })} type="file" accept='image/*' className="file-input w-full " />
                     {errors.photo?.type==='required' && <span className='text-red-500'>Please choose a photo</span>}
                   </div>
                   <div className="form-control">

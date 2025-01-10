@@ -13,11 +13,11 @@ import Cover from "../../shared/Cover";
 
 const Menu = () => {
     const [menues]=useMenu()
-    const offered=menues.filter(item=>item.category==='offered')
-    const dessert=menues.filter(item=>item.category==='dessert')
-    const pizza=menues.filter(item=>item.category==='pizza')
-    const soup=menues.filter(item=>item.category==='soup')
-    const salad=menues.filter(item=>item.category==='salad')
+    const offered=menues?.filter(item=>item.category==='offered')
+    const dessert=menues?.filter(item=>item.category==='dessert')
+    const pizza=menues?.filter(item=>item.category==='pizza')
+    const soup=menues?.filter(item=>item.category==='soup')
+    const salad=menues?.filter(item=>item.category==='salad')
     
     return (
         <div>
