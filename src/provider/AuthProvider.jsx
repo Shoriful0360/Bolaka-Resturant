@@ -69,6 +69,7 @@ const unSubscribe=onAuthStateChanged(auth,async(currentUser)=>{
           
             if(res.data.token){
                 localStorage.setItem('access_token',res.data.token)
+                setLoading(false)
             }
         })
     }
@@ -76,10 +77,10 @@ const unSubscribe=onAuthStateChanged(auth,async(currentUser)=>{
         setUser(currentUser)
        if(!loading){
         localStorage.removeItem('access_token')
-        
+        setLoading(false)
        }
     }
-setLoading(false)
+
 
 })
 

@@ -24,7 +24,7 @@ const Slide = () => {
     {
       isAdmin?<>
 
-<li><NavLink to={'/dashboard/adminHome'}><FaHome></FaHome>Admin home</NavLink> </li>  
+<li><NavLink to={'/dashboard/admin_home'}><FaHome></FaHome>Admin home</NavLink> </li>  
         <li><NavLink to="/dashboard/addItems"> <FaUtensils /> Add Items</NavLink></li>    
         <li><NavLink to="/dashboard/manageItems"><FaList />Manage Items</NavLink></li>    
         <li><NavLink to="/dashboard/manageBooking"><FaListCheck />Manage Booking</NavLink></li>    
