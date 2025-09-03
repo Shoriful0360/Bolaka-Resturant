@@ -7,7 +7,7 @@ import { useEffect } from "react";
 
 
 const axiosInstant=axios.create({
-    baseURL:'http://localhost:5000',
+    baseURL:'https://bolaka-resturant-server.vercel.app',
   
 
 })

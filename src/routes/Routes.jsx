@@ -84,7 +84,7 @@ export const router = createBrowserRouter([
             {
                 path: 'update/:id',
                 element: <AdminPrivate><UpdateItem></UpdateItem></AdminPrivate>,
-                loader: ({ params }) => fetch(`http://localhost:5000/menu/${params.id}`)
+                loader: ({ params }) => fetch(`https://bolaka-resturant-server.vercel.app/menu/${params.id}`)
             },
 
 

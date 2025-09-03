@@ -3,10 +3,23 @@ import { MdDeleteForever } from "react-icons/md";
 import SectionTitle from "../../../component/SectionTitle";
 import useCards from "../../../hooks/useCards";
 import { Link } from "react-router-dom";
+import useAxiosPublic from "../../../hook/useAxiosPublic";
+import{toast} from "react-hot-toast"
 const MyCart = () => {
     const [cart]=useCards()
     console.log("from cart",cart)
 const totalPrice=cart.reduce((prev,item)=>prev+item.price,0)
+const axiosSecure=useAxiosPublic()
+
+const handleDelet=async(id)=>{
+const {data}=await axiosSecure.delete(`/myCart/${id}`)
+if(data.insertedId){
+ toast.success('Delet is successfully')
+}else{
+  toast.error('something is wrong')
+}
+
+}
     return (
         <div>
         <div>
@@ -67,7 +80,7 @@ const totalPrice=cart.reduce((prev,item)=>prev+item.price,0)
         </td>
         <td>${item.price}</td>
         <th>
-          <button className="btn btn-ghost text-4xl"><MdDeleteForever /></button>
+          <button onClick={()=>handleDelet(item._id)} className="btn btn-ghost text-4xl"><MdDeleteForever /></button>
         </th>
       </tr>)
       }

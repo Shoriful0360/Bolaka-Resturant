@@ -7,7 +7,7 @@ import TestiMonials from "./TestiMonials";
 
 const Home = () => {
     return (
-        <div>
+        <div className="space-y-10">
             <Helmet>
                 <title>Bolaka | Home</title>
             </Helmet>

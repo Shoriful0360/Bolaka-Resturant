@@ -54,6 +54,7 @@ useEffect(()=>{
 const unSubscribe=onAuthStateChanged(auth,async(currentUser)=>{
 
     if(currentUser?.email){
+        setLoading(true)
         setUser(currentUser) 
         // send user info to database
         await axios.post(`${import.meta.env.VITE_URL}/users`,{

@@ -19,7 +19,7 @@ createRoot(document.getElementById('root')).render(
 <AuthProvider>
 <QueryClientProvider client={queryClient}>
 <HelmetProvider>
-<div className='w-11/12 mx-auto border-2 border-red-500'>
+<div className='px-10'>
     <RouterProvider router={router}></RouterProvider>
     <Toaster
   position="top-center"

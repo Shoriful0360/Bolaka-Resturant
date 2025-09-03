@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 
 const OurMenu = () => {
     const[menues]=useMenu()
+    console.log(menues)
     const popular=menues?.filter(item=>item.category==='popular')
  
 
@@ -16,7 +17,7 @@ const OurMenu = () => {
            <section>
             <SectionTitle 
             subHeading={'check it out'}
-            heading={'from out menu'}
+            heading={'from our menu'}
             ></SectionTitle>
             </section> 
             <div className="grid grid-cols-2 gap-10">

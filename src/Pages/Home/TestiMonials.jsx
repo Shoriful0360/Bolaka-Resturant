@@ -13,7 +13,7 @@ const TestiMonials = () => {
     const [reviews,setReviews]=useState([])
 
     useEffect(()=>{
-        axios.get('http://localhost:5000/review')
+        axios.get('https://bolaka-resturant-server.vercel.app/review')
         .then(res=>{
             setReviews(res.data)
         })

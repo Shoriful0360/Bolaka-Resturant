@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import  { useState } from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -18,12 +18,12 @@ import img6 from '../../assets/home/06.png'
 const Banner = () => {
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
     return (
-        <div className=' ' >
+        <div className='w-screen -ml-[calc(50vw-50%)]' >
             <Swiper
         style={{
           '--swiper-navigation-color': '#fff',
           '--swiper-pagination-color': '#fff',
-       
+      
         
         }}
         spaceBetween={10}
