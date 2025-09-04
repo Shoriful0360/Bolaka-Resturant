@@ -28,35 +28,35 @@ const Category = ({title="salad"}) => {
    </div>
 
     <TabPanel >
-    <div className='grid grid-cols-3 gap-5'>
+    <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-5'>
     {
         salad?.map(item=><FoodCard key={item._id} item={item}></FoodCard>)
      }
     </div>
     </TabPanel>
     <TabPanel>
-    <div className='grid grid-cols-3 gap-5'>
+    <div className='grid md:grid-cols-2 lg:grid-cols-3  gap-5'>
     {
         pizza?.map(item=><FoodCard key={item._id} item={item}></FoodCard>)
      }
     </div>
     </TabPanel>
     <TabPanel>
-    <div className='grid grid-cols-3 gap-5'>
+    <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-5'>
     {
         soup?.map(item=><FoodCard key={item._id} item={item}></FoodCard>)
      }
     </div>
     </TabPanel>
     <TabPanel>
-    <div className='grid grid-cols-3 gap-5'>
+    <div className='grid md:grid-cols-2 lg:grid-cols-3  gap-5'>
     {
         dessert?.map(item=><FoodCard key={item._id} item={item}></FoodCard>)
      }
     </div>
     </TabPanel>
     <TabPanel>
-    <div className='grid lg:grid-cols-3 md:grid-cols-2 mt-8 gap-5'>
+    <div className='grid md:grid-cols-2 lg:grid-cols-3 mt-8 gap-5'>
     {
         offered?.map(item=><FoodCard key={item._id} item={item}></FoodCard>)
      }

@@ -67,10 +67,10 @@ const Navbar = () => {
   );
 
   return (
-    <div className={`fixed top-0 left-0 z-50 w-full bg-white/80 backdrop-blur-md shadow-md transition-transform duration-300 ${
+    <div className={`fixed top-0 left-0 z-50 w-full bg-white/40 backdrop-blur-md  shadow-md transition-transform duration-300 ${
         show ? "translate-y-0" : "-translate-y-full"
       }`}>
-      <div className="navbar px-10 ">
+      <div className="navbar px-4 sm:px-10 ">
         <div className="navbar-start ">
           {/* Mobile dropdown */}
           <div className="dropdown">
@@ -94,9 +94,13 @@ const Navbar = () => {
 
           {/* Brand */}
           <div className="flex flex-col">
-            <a className="btn btn-ghost uppercase first-letter:text-7xl first-letter:font-bold first-letter:text-white first-letter:mr-3 first-letter:float-left text-xl">
-              Bolaka <br /> Resturant
-            </a>
+          <Link 
+  to="/" 
+  className="text-md md:text-2xl lg:text-xl xl:text-4xl font-extrabold bg-gradient-to-r from-red-500 via-yellow-500 to-green-500 bg-clip-text text-transparent"
+>
+ <span className="text-2xl md:text-4xl lg:text-3xl xl:text-5xl italic"> B</span>olaka <span className="text-xl lg:text-3xl xl:text-5xl italic">R</span>esturant
+</Link>
+
           </div>
         </div>
 

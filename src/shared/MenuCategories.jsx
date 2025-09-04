@@ -5,7 +5,7 @@ import PopularMenu from "./PopularMenu";
 const MenuCategories = ({menues,text,title}) => {
     return (
         <div>
-         <div className="grid mt-10 grid-cols-2 gap-6">
+         <div className="grid mt-10 lg:grid-cols-2 gap-6">
          {
             menues?.map(menu=><PopularMenu key={menu._id} menu={menu}></PopularMenu>)
           } 

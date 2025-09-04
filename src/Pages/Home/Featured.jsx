@@ -4,12 +4,12 @@ import SectionTitle from "../../component/SectionTitle";
 
 const Featured = () => {
     return (
-        <div  className="bg-feature-bg bg-cover bg-opacity-55 bg-slate-950 bg-fixed bg-no-repeat bg-blend-darken text-white bg-center py-32 px-40">
+        <div  className="bg-feature-bg bg-cover bg-opacity-55 bg-slate-950 bg-fixed bg-no-repeat bg-blend-darken text-white bg-center py-32 px-4 md:px-10 lg:px-40 ">
            <section>
             <SectionTitle heading={'from our menu'} subHeading={'Should Try'}></SectionTitle>
             </section> 
-            <div className="sm:flex justify-center items-center">
-              <div className="w-[600px] flex-1">
+            <div className="sm:flex justify-center space-y-6 lg:items-center">
+              <div className="max-w-3xl flex-1">
                 <img src={bgImg} alt="" />
               </div>
               <div className="flex-1 sm:ml-10">

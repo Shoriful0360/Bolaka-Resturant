@@ -12,23 +12,23 @@ import SellerRoute from "./Seller/SellerRoute";
 
 
 
-const Slide = () => {
+const Slide = ({handleClose}) => {
   const [isAdmin,isAdminLoading]=useAdmin()
 
 
   if(isAdminLoading) return <Loading></Loading>
 
     return (
-        <div >
+        <div className={`bg-orange-400 rounded-md *:text-white h-full `} >
       <ul className="menu *:mt-4 text-xl text-black font-semibold uppercase">
     {
       isAdmin?<>
 
-<li><NavLink to={'/dashboard/admin_home'}><FaHome></FaHome>Admin home</NavLink> </li>  
-        <li><NavLink to="/dashboard/addItems"> <FaUtensils /> Add Items</NavLink></li>    
-        <li><NavLink to="/dashboard/manageItems"><FaList />Manage Items</NavLink></li>    
-        <li><NavLink to="/dashboard/manageBooking"><FaListCheck />Manage Booking</NavLink></li>    
-        <li><NavLink to="/dashboard/users"><FaUsersGear />All Users</NavLink></li>    
+<li onClick={handleClose}><NavLink to={'/dashboard/admin_home'}><FaHome></FaHome>Admin home</NavLink> </li>  
+        <li onClick={handleClose}><NavLink to="/dashboard/addItems"> <FaUtensils /> Add Items</NavLink></li>    
+        <li onClick={handleClose}><NavLink to="/dashboard/manageItems"><FaList />Manage Items</NavLink></li>    
+        <li onClick={handleClose}><NavLink to="/dashboard/manageBooking"><FaListCheck />Manage Booking</NavLink></li>    
+        <li onClick={handleClose}><NavLink to="/dashboard/users"><FaUsersGear />All Users</NavLink></li>    
      
       </>
       :
@@ -37,10 +37,10 @@ const Slide = () => {
     }
 
         <div className="divider"></div>   
-        <li><NavLink to="/"><FaHome></FaHome>home</NavLink></li>    
-        <li><NavLink to=""><CiMenuFries />menu</NavLink></li>    
-        <li><NavLink to=""><RiShoppingBagFill />shop</NavLink></li>    
-        <li><NavLink to=""><MdContactPhone />contact</NavLink></li>  </ul>  
+        <li onClick={handleClose}><NavLink to="/"><FaHome></FaHome>home</NavLink></li>    
+        <li onClick={handleClose}><NavLink to=""><CiMenuFries />menu</NavLink></li>    
+        <li onClick={handleClose}><NavLink to=""><RiShoppingBagFill />shop</NavLink></li>    
+        <li onClick={handleClose}><NavLink to=""><MdContactPhone />contact</NavLink></li>  </ul>  
         </div>
     );
 };

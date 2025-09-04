@@ -70,7 +70,7 @@ const FoodCard = ({item}) => {
       }
     }
     return (
-        <div>
+        <div className="grid">
           <div className="card bg-base-100 w-[420px ] group relative shadow-xl">
   <figure>
     <img
