@@ -51,7 +51,7 @@ const Slide = ({ handleClose }) => {
             <li><NavLink to="/dashboard/reservation"> <MdOutlineDateRange /> reservation</NavLink></li>
             <li><NavLink to={"/dashboard/payment_history"}><RiSecurePaymentFill />payment history</NavLink></li>
             <li><NavLink to="/dashboard/my_cart"><FaCartArrowDown />my cart</NavLink></li>
-            <li><NavLink to=""><TbBrandBooking />my booking</NavLink></li>
+            <li><NavLink to="my_booking"><TbBrandBooking />my booking</NavLink></li>
 
             <li onClick={handleClose}><NavLink to=""><MdContactPhone />contact</NavLink></li>
           </>
