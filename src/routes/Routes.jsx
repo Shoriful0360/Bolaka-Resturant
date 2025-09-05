@@ -20,6 +20,7 @@ import AdminHome from "../Pages/Dashboard/Admin/AdminHome";
 import CustomerDashboardHome from "../Pages/Dashboard/Customer/CustomerDashboardHome";
 import Reservation from "../Pages/Dashboard/Customer/Reservation";
 import MyBooking from "../Pages/Dashboard/Customer/MyBooking";
+import Contact from "../Pages/Dashboard/Customer/Contact";
 // import MyCart from "../Pages/Dashboard/Admin/Seller/MyCart";
 
 
@@ -115,6 +116,9 @@ export const router = createBrowserRouter([
             {
                 path:'payment_history',
                 element:<PaymentHistory></PaymentHistory>
+            },{
+                path:'contact',
+                element:<Contact/>
             }
 
         ]

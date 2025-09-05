@@ -53,7 +53,7 @@ const Slide = ({ handleClose }) => {
             <li><NavLink to="/dashboard/my_cart"><FaCartArrowDown />my cart</NavLink></li>
             <li><NavLink to="my_booking"><TbBrandBooking />my booking</NavLink></li>
 
-            <li onClick={handleClose}><NavLink to=""><MdContactPhone />contact</NavLink></li>
+            <li onClick={handleClose}><NavLink to="contact"><MdContactPhone />contact</NavLink></li>
           </>
         }
 
