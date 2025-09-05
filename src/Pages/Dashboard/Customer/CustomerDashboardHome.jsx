@@ -5,17 +5,23 @@ import ReviewModal from "../../../component/modal/ReviewModal";
 import useAxiosPublic from "../../../hook/useAxiosPublic";
 import Swal from "sweetalert2";
 import UseAuthContext from "../../../hook/UseAuthContext";
+import UserInfo from "../../../hook/UserInfo";
+import Loading from "../../../component/Loading";
 
 export default function CustomerDashboard() {
-  const{user,loading}=UseAuthContext()
+  const[role,isLoading]=UserInfo()
+  const{name,role:designation,image}=role || {}
  
   const [isModalOpen,setIsModalOpen]=useState(false)
 const axiosPublic=useAxiosPublic()
+
+if(isLoading) return <Loading/>
   const handleReview=async(reviewData)=>{
     const newReview={
       ...reviewData,
-      name:user?.displayName,
-      image:user?.photoURL
+      name:name,
+      image:image,
+      designation:designation
     }
 
     try {

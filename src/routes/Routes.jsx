@@ -22,6 +22,7 @@ import Reservation from "../Pages/Dashboard/Customer/Reservation";
 import MyBooking from "../Pages/Dashboard/Customer/MyBooking";
 import Contact from "../Pages/Dashboard/Customer/Contact";
 import ManageBooking from "../Pages/Dashboard/Admin/ManageBooking";
+import TableBooking from "../Pages/booking/TableBooking";
 // import MyCart from "../Pages/Dashboard/Admin/Seller/MyCart";
 
 
@@ -46,7 +47,15 @@ export const router = createBrowserRouter([
                 path: '/shop',
                 element: <OurShop></OurShop>
             },
-            {}
+             {
+        path:'/contact',
+        element:<Contact/>
+    },
+    {
+        path:"/booking",
+        element:<TableBooking/>
+    }
+          
         ]
     },
     {
@@ -127,5 +136,6 @@ export const router = createBrowserRouter([
             }
 
         ]
-    }
+    },
+   
 ])

@@ -3,20 +3,36 @@ import PropTypes from "prop-types"
 import Swal from "sweetalert2";
 const ReviewModal = ({ isOpen, onClose, onSubmit }) => {
   const [reviewText, setReviewText] = useState("");
+  const[titel,setTitel]=useState()
   const [rating, setRating] = useState(0);
+  const[error,setError]=useState('')
   if (!isOpen) return null; // Modal বন্ধ থাকলে কিছু দেখাবে না
 
-  const handleSubmit = () => {
-    if (reviewText && rating > 0) {
-      onSubmit({ reviewText, rating });
-      setReviewText("");
-      setRating(0);
-      onClose();
-    } else {
-      Swal.fire("Please enter review and select rating!");
+  const handleReviewText = (value) => {
+   
+
+    if (value.length > 200) {
+      setError("Text should not exceed 150 words");
+      return
   
+    } else {
+      setError("");
+      setReviewText(value);
     }
   };
+
+const handleSubmit = () => {
+  if (reviewText.length > 0 && titel.length > 0 && rating > 0) {
+    onSubmit({ reviewText, rating, titel });
+    setReviewText("");
+    setRating(0);
+    setTitel(""); // যদি তুমি titel state use করো
+    onClose();
+  } else {
+    Swal.fire("Please enter review, title and select rating!");
+  }
+};
+
 
   return (
     <div className="fixed inset-0 z-40 bg-black bg-opacity-60 flex items-center justify-center">
@@ -35,15 +51,24 @@ const ReviewModal = ({ isOpen, onClose, onSubmit }) => {
             </button>
           ))}
         </div>
-{/* ${star <= rating ? "text-yellow-400" : "text-gray-300"} */}
+          <label htmlFor="">
+           
+            <input onChange={(e)=>setTitel(e.target.value)} 
+            type="text" 
+            value={titel} 
+           placeholder="Food Name"
+           required 
+           className="input input-bordered w-full mb-2" />
+          </label>
         {/* Review Text */}
         <textarea
           value={reviewText}
-          onChange={(e) => setReviewText(e.target.value)}
+          onChange={(e)=>handleReviewText(e.target.value)}
           placeholder="Write your review..."
           className="textarea textarea-bordered w-full h-32 mb-4"
         />
-
+        {/* error message */}
+        {error && <p className="text-red-600">{error}</p>}
         {/* Buttons */}
         <div className="flex justify-end gap-2">
           <button

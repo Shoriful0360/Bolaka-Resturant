@@ -34,6 +34,7 @@ const Navbar = () => {
       <li><NavLink to="/">Home</NavLink></li>
       <li><NavLink to="/menu">OUR MENU</NavLink></li>
       <li><NavLink to="/shop">OUR SHOP</NavLink></li>
+      <li><NavLink to="/booking">Booking</NavLink></li>
       <li><NavLink to="/contact">CONTACT US</NavLink></li>
 
       {/* ✅ User + Role condition */}
