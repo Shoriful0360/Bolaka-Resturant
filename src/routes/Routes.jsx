@@ -21,6 +21,7 @@ import CustomerDashboardHome from "../Pages/Dashboard/Customer/CustomerDashboard
 import Reservation from "../Pages/Dashboard/Customer/Reservation";
 import MyBooking from "../Pages/Dashboard/Customer/MyBooking";
 import Contact from "../Pages/Dashboard/Customer/Contact";
+import ManageBooking from "../Pages/Dashboard/Admin/ManageBooking";
 // import MyCart from "../Pages/Dashboard/Admin/Seller/MyCart";
 
 
@@ -83,6 +84,10 @@ export const router = createBrowserRouter([
             {
                 path: 'manageItems',
                 element: <AdminPrivate><ManageItems></ManageItems></AdminPrivate>
+            },
+            {
+                path:'manage_booking',
+                element:<ManageBooking/>
             },
             {
                 path: 'update/:id',

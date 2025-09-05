@@ -38,7 +38,7 @@ const Slide = ({ handleClose }) => {
             <li onClick={handleClose}><NavLink to="/dashboard/users"><FaUsersGear />All Users</NavLink></li>
             <li onClick={handleClose}><NavLink to="/dashboard/addItems"> <FaUtensils /> Add Items</NavLink></li>
             <li onClick={handleClose}><NavLink to="/dashboard/manageItems"><FaList />Manage Items</NavLink></li>
-            <li onClick={handleClose}><NavLink to="/dashboard/manageBooking"><FaListCheck />Manage Booking</NavLink></li>
+            <li onClick={handleClose}><NavLink to="manage_booking"><FaListCheck />Manage Booking</NavLink></li>
 
           </>
         }
