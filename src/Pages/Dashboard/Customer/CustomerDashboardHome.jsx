@@ -1,7 +1,10 @@
+import { useState } from "react";
 import { FaShoppingCart, FaHistory, FaHeart } from "react-icons/fa";
 import { MdRateReview } from "react-icons/md";
+import ReviewModal from "../../../component/modal/ReviewModal";
 
 export default function CustomerDashboard() {
+  const [isModalOpen,setIsModalOpen]=useState(false)
   return (
     <div className="p-6 space-y-6">
       {/* Header */}
@@ -57,10 +60,11 @@ export default function CustomerDashboard() {
         <button className="flex items-center gap-3 bg-orange-500 text-white px-6 py-4 rounded-2xl shadow hover:bg-orange-600 transition">
           <FaShoppingCart className="text-2xl" /> Order Food
         </button>
-        <button className="flex items-center gap-3 bg-blue-500 text-white px-6 py-4 rounded-2xl shadow hover:bg-blue-600 transition">
+        <button onClick={()=>setIsModalOpen(true)}  className="flex items-center gap-3 bg-blue-500 text-white px-6 py-4 rounded-2xl shadow hover:bg-blue-600 transition">
           <MdRateReview className="text-2xl" /> Write a Review
         </button>
       </div>
+    <ReviewModal isOpen={isModalOpen} onClose={()=>setIsModalOpen(false)}/>
     </div>
   );
 }

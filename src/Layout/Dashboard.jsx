@@ -73,7 +73,7 @@ const Dashboard = () => {
     <a className="btn btn-ghost text-xl">Dashboard</a>
   </div>
   <div className="">
-    <input type="text" placeholder="Search for anything" className="input input-bordered  w-72" />
+    <input type="text" placeholder="Search for anything" className="input input-bordered  lg:w-72" />
   
   </div>
 </div>
