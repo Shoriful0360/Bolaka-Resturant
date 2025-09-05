@@ -34,7 +34,6 @@ const Slide = ({ handleClose }) => {
             </div>
 
             <li onClick={handleClose}><NavLink to={'/dashboard/admin_home'}><FaHome></FaHome> home</NavLink> </li>
-            <li onClick={handleClose}><NavLink to="/dashboard/shop"><RiShoppingBagFill />shop</NavLink></li>
             <li onClick={handleClose}><NavLink to="/dashboard/users"><FaUsersGear />All Users</NavLink></li>
             <li onClick={handleClose}><NavLink to="/dashboard/addItems"> <FaUtensils /> Add Items</NavLink></li>
             <li onClick={handleClose}><NavLink to="/dashboard/manageItems"><FaList />Manage Items</NavLink></li>

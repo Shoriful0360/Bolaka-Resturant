@@ -1,46 +1,43 @@
-import SectionTitle from "../../component/SectionTitle";
-import { Swiper, SwiperSlide } from 'swiper/react';
 
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/navigation';
-import { Navigation } from 'swiper/modules';
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { Rating } from "@smastrom/react-rating";
-import '@smastrom/react-rating/style.css'
+import { RiDoubleQuotesL, RiDoubleQuotesR } from 'react-icons/ri';
+
 const TestiMonials = () => {
-    const [reviews,setReviews]=useState([])
-
-    useEffect(()=>{
-        axios.get('https://bolaka-resturant-server.vercel.app/review')
-        .then(res=>{
-            setReviews(res.data)
-        })
-    },[])
     return (
-        <div>
-            <SectionTitle heading={"testimonials"} subHeading={'What Our Client Say'} ></SectionTitle>
-            <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
-                
-                {
-reviews.map((review=> <SwiperSlide key={review._id}>
-<div className="flex flex-col justify-center items-center sm:mx-24 mx-10 my-20 space-y-4">
-
-<Rating
-      style={{ maxWidth: 180 }}
-      value={review.rating}
-      readOnly
-    />
-
-    <p>{review.details}</p>
-    <h1 className="text-yellow-600">{review.name}</h1>
-</div>
-    </SwiperSlide>))
-                }
+            <div
+        
+          className="flex gap-6 flex-wrap  "
+        >
+        
+         
+             <div
+             
+              className="bg-white w-100 rounded-2xl shadow-lg p-6 transition-transform hover:scale-105"
+            >
+              {/* Top section with image + name */}
+              <div className="flex items-center gap-4 mb-4">
+                <img
+                src=''
+                  className="w-12 h-12 rounded-full border-2 border-indigo-500 object-cover"
+                />
+                <div>
+                  <h4 className="font-semibold text-gray-800">md:hsoriful</h4>
+                  <span className="text-sm text-gray-500"></span>
+                </div>
+              </div>
+              <p className='text-5xl'><RiDoubleQuotesL /></p>
+                   
+              {/* Rating */}
+              <div className="flex mb-3 text-yellow-400 text-lg">
+                ★
+              </div>
+                 {/* {"★".repeat(review.rating)}{"☆".repeat(5 - review.rating)} */}
+              {/* Review text (clamped to avoid overflow) */}
+              <p className="text-gray-600 text-justify ">
+               hellow how are you
+              </p>
+              <p className="text-5xl  ml-[290px] md:ml-[170px]  lg:ml-[335px]"><RiDoubleQuotesR /></p>
+            </div>
        
-     
-      </Swiper>
         </div>
     );
 };

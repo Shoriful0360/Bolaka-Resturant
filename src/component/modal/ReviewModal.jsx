@@ -1,9 +1,9 @@
 import { useState } from "react";
-
+import PropTypes from "prop-types"
+import Swal from "sweetalert2";
 const ReviewModal = ({ isOpen, onClose, onSubmit }) => {
   const [reviewText, setReviewText] = useState("");
   const [rating, setRating] = useState(0);
-console.log('rating',rating)
   if (!isOpen) return null; // Modal বন্ধ থাকলে কিছু দেখাবে না
 
   const handleSubmit = () => {
@@ -13,7 +13,8 @@ console.log('rating',rating)
       setRating(0);
       onClose();
     } else {
-      alert("Please enter review and select rating");
+      Swal.fire("Please enter review and select rating!");
+  
     }
   };
 
@@ -64,3 +65,10 @@ console.log('rating',rating)
 };
 
 export default ReviewModal;
+
+// proptypes validation define
+ReviewModal.propTypes={
+  isOpen: PropTypes.bool.isRequired ,
+  onClose: PropTypes.func.isRequired,
+  onSubmit:PropTypes.func.isRequired
+}

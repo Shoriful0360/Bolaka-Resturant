@@ -1,10 +1,38 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaShoppingCart, FaHistory, FaHeart } from "react-icons/fa";
 import { MdRateReview } from "react-icons/md";
 import ReviewModal from "../../../component/modal/ReviewModal";
+import useAxiosPublic from "../../../hook/useAxiosPublic";
+import Swal from "sweetalert2";
+import UseAuthContext from "../../../hook/UseAuthContext";
 
 export default function CustomerDashboard() {
+  const{user,loading}=UseAuthContext()
+ 
   const [isModalOpen,setIsModalOpen]=useState(false)
+const axiosPublic=useAxiosPublic()
+  const handleReview=async(reviewData)=>{
+    const newReview={
+      ...reviewData,
+      name:user?.displayName,
+      image:user?.photoURL
+    }
+
+    try {
+     const {data}= await axiosPublic.post('/review',newReview)
+     if(data.insertedId){
+      Swal.fire({
+  position: "top-center",
+  icon: "success",
+  title: "Thank you giving review",
+  showConfirmButton: false,
+  timer: 1500
+});
+     }
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
   return (
     <div className="p-6 space-y-6">
       {/* Header */}
@@ -64,7 +92,7 @@ export default function CustomerDashboard() {
           <MdRateReview className="text-2xl" /> Write a Review
         </button>
       </div>
-    <ReviewModal isOpen={isModalOpen} onClose={()=>setIsModalOpen(false)}/>
+    <ReviewModal isOpen={isModalOpen} onSubmit={handleReview} onClose={()=>setIsModalOpen(false)}/>
     </div>
   );
 }
