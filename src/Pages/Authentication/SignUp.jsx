@@ -14,8 +14,7 @@ const SignUp = () => {
     const {loginEmail,createUser,updateUserProfile}=UseAuthContext()
     const navigate=useNavigate()
 
-    const {
-        register,handleSubmit,formState: { errors },} = useForm()
+    const { register,handleSubmit,formState: { errors },} = useForm()
 
     //   login with email and password
       const onSubmit =async (data) => {

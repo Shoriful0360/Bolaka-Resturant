@@ -53,14 +53,16 @@ const logoutUser=()=>{
 useEffect(()=>{
 const unSubscribe=onAuthStateChanged(auth,async(currentUser)=>{
 
-    if(currentUser?.email){
+    if(currentUser?.email && currentUser?.photoURL && currentUser?.displayName){
         setLoading(true)
         setUser(currentUser) 
         // send user info to database
+        
         await axios.post(`${import.meta.env.VITE_URL}/users`,{
             name:currentUser?.displayName,
             image:currentUser?.photoURL,
-            email:currentUser?.email
+            email:currentUser?.email,
+            role:'Customer'
         })
 
         // jwt token

@@ -7,9 +7,9 @@ import { useEffect } from "react";
 
 
 const axiosInstant=axios.create({
-    baseURL:'https://bolaka-resturant-server.vercel.app',
+    baseURL:'http://localhost:5000',
   
-
+// https://bolaka-resturant-server.vercel.app
 })
 
 const useAxiosSecure = () => {

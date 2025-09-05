@@ -16,8 +16,9 @@ import UpdateItem from "../Pages/Dashboard/Admin/UpdateItem";
 import MyCart from "../Pages/Dashboard/Seller/MyCart";
 import Payment from "../Pages/Dashboard/Customer/Payment";
 import PaymentHistory from "../Pages/Dashboard/Customer/PaymentHistory";
-import UserHome from "../Pages/Dashboard/Customer/UserHome";
 import AdminHome from "../Pages/Dashboard/Admin/AdminHome";
+import CustomerDashboardHome from "../Pages/Dashboard/Customer/CustomerDashboardHome";
+import Reservation from "../Pages/Dashboard/Customer/Reservation";
 // import MyCart from "../Pages/Dashboard/Admin/Seller/MyCart";
 
 
@@ -86,16 +87,20 @@ export const router = createBrowserRouter([
                 element: <AdminPrivate><UpdateItem></UpdateItem></AdminPrivate>,
                 loader: ({ params }) => fetch(`https://bolaka-resturant-server.vercel.app/menu/${params.id}`)
             },
-
+       
 
             // customer route
             {
                 path:'user_home',
-                element:<UserHome></UserHome>
+                element:<CustomerDashboardHome/>
             },
             {
                 path: 'my_cart',
                 element: <MyCart></MyCart>
+            },
+            {
+                path:'reservation',
+                element:<Reservation/>
             },
 
             {   

@@ -2,7 +2,7 @@ import axios from "axios";
 
 
 const instant=axios.create({
-    baseURL:'https://bolaka-resturant-server.vercel.app'
+    baseURL:'http://localhost:5000'
 })
 
 const useAxiosPublic = () => {

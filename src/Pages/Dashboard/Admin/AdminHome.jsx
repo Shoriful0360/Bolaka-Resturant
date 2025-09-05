@@ -68,7 +68,10 @@ const pieChartData=chartData?.map(data=>{
 
     return (
         <div>
-        <h1 className="text-lg font-bold" >Hi,<span className="text-lg font-bold uppercase">{user?user?.displayName :'Wellcome Back'}</span></h1>
+      <div className="space-y-3 my-4 font-serif">
+          <h1 className="text-lg font-bold" >Welcome back, Admin!</h1>
+        <p>Here's what's happening with your resturant today.</p>
+      </div>
 
 {/* cart */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">

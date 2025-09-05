@@ -1,18 +1,17 @@
 
 import { Navigate, useLocation } from "react-router-dom";
 import Loading from "../component/Loading";
-import useAdmin from "../hook/useAdmin";
 import UseAuthContext from "../hook/UseAuthContext";
+import UserInfo from "../hook/UserInfo";
 
 
 const AdminPrivate = ({children}) => {
-    const{user,loading}=UseAuthContext()
-    const [isAdmin,isAdminLoading]=useAdmin()
+    const [role,isLoading]=UserInfo()
     const location=useLocation()
-    if(loading||isAdminLoading ) return <Loading></Loading>
+    if(isLoading ) return <Loading></Loading>
  
 
-    if(user && isAdmin) return children
+    if(role.role==="Admin") return children
 
     return (
         <div>

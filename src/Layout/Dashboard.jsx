@@ -10,7 +10,7 @@ const Dashboard = () => {
   const handleClose = () => setOpen(false);
 
   return (
-    <div className="">
+    <div className="bg-slate-100">
       {/* Small device navbar */}
       <div className="navbar fixed top-0 left-0 w-full bg-base-100 shadow-sm lg:hidden z-50 px-8">
         <div onClick={handleToggle} className="flex-1 text-2xl font-bold cursor-pointer">
@@ -55,10 +55,10 @@ const Dashboard = () => {
       </div>
 
       {/* Layout */}
-      <div className="flex h-screen gap-3 relative">
+      <div className="flex h-screen  relative">
         {/* Sidebar */}
         <div
-          className={`fixed top-0 left-0 h-screen w-64 px-4 py-6 transform transition-transform duration-300 z-40
+          className={`fixed top-0 left-0 h-screen  lg:w-96 px-4 py-6 transform transition-transform duration-300 z-40
             ${open ? "translate-x-0" : "-translate-x-full"}
             lg:static lg:translate-x-0 lg:block`}
         >
@@ -66,7 +66,17 @@ const Dashboard = () => {
         </div>
 
         {/* Main content */}
-        <div className="flex-1 overflow-y-auto p-4 bg-base-100">
+        <div className="flex-1 overflow-y-auto  mt-20 sm:mt-10 ">
+          {/* header */}
+          <div className="navbar shadow-md justify-between pt-10 lg:pt-0 ">
+  <div className="">
+    <a className="btn btn-ghost text-xl">Dashboard</a>
+  </div>
+  <div className="">
+    <input type="text" placeholder="Search for anything" className="input input-bordered  w-72" />
+  
+  </div>
+</div>
           <Outlet />
         </div>
       </div>

@@ -2,15 +2,16 @@ import { Link, NavLink } from "react-router-dom";
 import UseAuthContext from "../../hook/UseAuthContext";
 import { FaCartPlus } from "react-icons/fa";
 import useCards from "../../hooks/useCards";
-import useAdmin from "../../hook/useAdmin";
+import useAdmin from "../../hook/UserInfo";
 import Loading from "../../component/Loading";
 import { useEffect, useState } from "react";
+import UserInfo from "../../hook/UserInfo";
 
 const Navbar = () => {
   const[show,setShow]=useState(true)
   const[lastScrolly,setLastScrolly]=useState(0)
   const { user, logoutUser, loading } = UseAuthContext();
-  const [isAdmin, isAdminLoading] = useAdmin();
+  const [role, isLoading] = UserInfo();
   const [cart] = useCards()
   console.log('lastScrooly',lastScrolly)
 
@@ -36,16 +37,17 @@ const Navbar = () => {
       <li><NavLink to="/contact">CONTACT US</NavLink></li>
 
       {/* ✅ User + Role condition */}
-      {user && isAdmin && (
+      {user && role?.role==="Admin" && (
         <li><NavLink to="/dashboard/admin_home">DASHBOARD</NavLink></li>
       )}
-      {user && !isAdmin && (
+      {user && role?.role==="Customer" && (
         <>
           <li><NavLink to="/dashboard/user_home">DASHBOARD</NavLink></li>
+          {/* cart */}
           <li className="relative">
             <NavLink to="/dashboard/my_cart">
              
-               {isAdminLoading || loading ? (
+               {isLoading || loading ? (
       // 🔹 Loading অবস্থায় badge এর জায়গায় spinner/loader
       <small className="hidden">
         Loading...

@@ -3,25 +3,25 @@ import UseAuthContext from "./UseAuthContext";
 import useAxiosSecure from "./useAxiosSecure";
 
 
-const useAdmin = () => {
+const UserInfo = () => {
     const axiosSecure=useAxiosSecure()
     const {user,loading}=UseAuthContext()
  
-    const {data:isAdmin,isLoading:isAdminLoading}=useQuery({
-        queryKey:[user?.email,'isAdmin'],
+    const {data:role,isLoading}=useQuery({
+        queryKey:[user?.email,'usrInfo'],
         enabled:!loading,
         queryFn:async()=>{
-            const res=await axiosSecure.get(`/user/admin/${user?.email}`,{
+            const {data}=await axiosSecure.get(`/user/role/${user?.email}`,{
                 headers:{
                   authorization:`Bearer ${localStorage.getItem('access_token')}`
               
                 }
               })
-
-            return res.data?.admin
+            
+            return data
         }
     })
-    return [isAdmin,isAdminLoading]
+    return [role,isLoading]
 };
 
-export default useAdmin;
+export default UserInfo;
