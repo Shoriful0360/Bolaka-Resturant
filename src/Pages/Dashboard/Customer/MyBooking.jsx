@@ -1,41 +1,24 @@
-import { useState } from "react";
+import {useState } from "react";
+
+import UseAuthContext from "../../../hook/UseAuthContext";
+import UseFetching from "../../../hooks/useFetching";
+import Loading from "../../../component/Loading";
 
 const MyBooking = () => {
-  const [activeTab, setActiveTab] = useState("upcoming");
+  const [activeTab, setActiveTab] = useState("Pending");
+const {user}=UseAuthContext()
 
-  const bookings = [
-    {
-      id: 1,
-      date: "Jan 12, 2025",
-      time: "7:00 PM",
-      guests: 4,
-      table: 12,
-      status: "Confirmed",
-    },
-    {
-      id: 2,
-      date: "Dec 20, 2024",
-      time: "8:00 PM",
-      guests: 2,
-      table: 5,
-      status: "Completed",
-    },
-    {
-      id: 3,
-      date: "Nov 10, 2024",
-      time: "6:30 PM",
-      guests: 3,
-      table: 7,
-      status: "Cancelled",
-    },{
-  id: 4,
-  date: "Sep 10, 2025",
-  time: "7:00 PM",
-  guests: 4,
-  table: 12,
-  status: "Pending" // <-- নতুন বুকিং ডিফল্টে Pending
-}
-  ];
+   const { data:bookings, isLoading, error, refetch } = UseFetching('get',
+    `/booking/${user?.email}?status=${activeTab}`
+  );
+
+  const handleStatus=async(text,id)=>{
+    await UseFetching("patch",`/booking/${id}`,text)
+    refetch()
+ 
+  }
+if(isLoading) return <Loading/>
+ 
 
   return (
     <div className="mt-6 sm:px-6  min-h-screen bg-gray-50">
@@ -44,7 +27,7 @@ const MyBooking = () => {
 
       {/* Tabs */}
       <div className="flex sm:justify-center gap-2 sm:gap-4 mb-8">
-        {["Pending","upcoming", "completed", "cancelled"].map((tab) => (
+        {["Pending","Upcoming", "Completed", "Cancelled"].map((tab) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
@@ -58,74 +41,54 @@ const MyBooking = () => {
           </button>
         ))}
       </div>   {/* Upcoming → Card Style */}
-      {activeTab === "Pending" && (
+
+      {
+        activeTab==="Pending" ||activeTab==="Upcoming" || activeTab==="Cancelled" ?
+         
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {bookings
-            .filter((b) =>  b.status === "Pending"  )
-            .map((booking) => (
-              <div
-                key={booking.id}
-                className="p-6 bg-white shadow-lg rounded-xl border border-gray-200"
-              >
-                <h3 className="text-xl font-bold">Table #{booking.table}</h3>
-                <p className="text-gray-600">📅 {booking.date}</p>
-                <p className="text-gray-600">⏰ {booking.time}</p>
-                <p className="text-gray-600">👥 Guests: {booking.guests}</p>
-                <p className="mt-2">
-                  Status:{" "}
-                  <span className="text-green-600 font-semibold">
-                    {booking.status}
-                  </span>
-                </p>
-                <div className="mt-4 flex gap-2">
-                  <button className="btn btn-sm bg-red-500 text-white">
-                    Cancel
-                  </button>
-                  <button className="btn btn-sm bg-blue-500 text-white">
-                    Rebook
-                  </button>
-                </div>
-              </div>
+          {bookings?.map((booking) => (
+            <div
+  key={booking._id}
+  className="p-6 bg-white shadow-lg rounded-xl border border-gray-200"
+>
+  <h3 className="text-xl font-bold">Table #{booking.table}</h3>
+  <p className="text-gray-600">📛 Name: {booking.name}</p>
+  <p className="text-gray-600">📞 Phone: {booking.phone}</p>
+  <p className="text-gray-600">✉️ Email: {booking.email}</p>
+  <p className="text-gray-600">📅 {booking.date}</p>
+  <p className="text-gray-600">⏰ {booking.time}</p>
+  <p className="text-gray-600">👥 Guests: {booking.guests}</p>
+
+  <p className="mt-2">
+    Status:{" "}
+    <span
+      className={`font-semibold ${
+        booking.status === "Pending"
+          ? "text-yellow-600"
+          : booking.status === "Upcoming"
+          ? "text-blue-600"
+          : "text-green-600"
+      }`}
+    >
+      {booking.status}
+    </span>
+  </p>
+{
+  booking.status==='Pending' &&(
+<div className="mt-4 flex gap-2">
+    <button onClick={()=>handleStatus("Cancelled",booking._id)} className="btn btn-sm bg-red-500 text-white">Cancel</button>
+    <button className="btn btn-sm bg-blue-500 text-white">Rebook</button>
+  </div>
+  )
+}
+  
+</div>
+
             ))}
         </div>
-      )}
+        :
 
-      {/* Upcoming → Card Style */}
-      {activeTab === "upcoming" && (
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {bookings
-            .filter((b) => b.status === "Confirmed" )
-            .map((booking) => (
-              <div
-                key={booking.id}
-                className="p-6 bg-white shadow-lg rounded-xl border border-gray-200"
-              >
-                <h3 className="text-xl font-bold">Table #{booking.table}</h3>
-                <p className="text-gray-600">📅 {booking.date}</p>
-                <p className="text-gray-600">⏰ {booking.time}</p>
-                <p className="text-gray-600">👥 Guests: {booking.guests}</p>
-                <p className="mt-2">
-                  Status:{" "}
-                  <span className="text-green-600 font-semibold">
-                    {booking.status}
-                  </span>
-                </p>
-                <div className="mt-4 flex gap-2">
-                  <button className="btn btn-sm bg-red-500 text-white">
-                    Cancel
-                  </button>
-                  <button className="btn btn-sm bg-blue-500 text-white">
-                    Rebook
-                  </button>
-                </div>
-              </div>
-            ))}
-        </div>
-      )}
-
-      {/* Completed → Table Style */}
-      {activeTab === "completed" && (
-        <div className="overflow-x-auto">
+ <div className="overflow-x-auto  flex flex-col">
           <table className="table w-full border">
             <thead className="bg-gray-100">
               <tr>
@@ -138,10 +101,8 @@ const MyBooking = () => {
               </tr>
             </thead>
             <tbody>
-              {bookings
-                .filter((b) => b.status === "Completed")
-                .map((booking) => (
-                  <tr key={booking.id}>
+              {bookings?.map((booking) => (
+                  <tr key={booking._id}>
                     <td>{booking.date}</td>
                     <td>{booking.time}</td>
                     <td>{booking.guests}</td>
@@ -157,8 +118,10 @@ const MyBooking = () => {
             </tbody>
           </table>
         </div>
-      )}
+      }
+ 
 
+    
       {/* Cancelled → Timeline Style */}
       {activeTab === "cancelled" && (
         <div className="relative border-l-2 border-red-500 pl-6 space-y-6">

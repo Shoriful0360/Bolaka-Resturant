@@ -16,7 +16,8 @@ export default function TableBooking() {
     guests: 1,
     table: "",
     note: "",
-    email:user?.email
+    email:user?.email,
+    status:"Pending"
   });
 
   const handleChange = (e) => {
@@ -42,6 +43,7 @@ export default function TableBooking() {
       guests: 1,
       table: "",
       note: "",
+      status:"Pending"
     });
     }
 navigate('/dashboard/my_booking')
