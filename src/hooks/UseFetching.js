@@ -3,6 +3,7 @@ import useAxiosPublic from "../hook/useAxiosPublic";
 import UseAuthContext from "../hook/UseAuthContext";
 
 const UseFetching = (crud, url, body = null) => {
+    console.log ('curd',crud,"url",url,'body',body)
   const axiosPublic = useAxiosPublic();
   const { user } = UseAuthContext();
 

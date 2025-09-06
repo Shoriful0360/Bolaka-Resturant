@@ -3,9 +3,11 @@ import {useState } from "react";
 import UseAuthContext from "../../../hook/UseAuthContext";
 import UseFetching from "../../../hooks/useFetching";
 import Loading from "../../../component/Loading";
+import useAxiosPublic from "../../../hook/useAxiosPublic";
 
 const MyBooking = () => {
   const [activeTab, setActiveTab] = useState("Pending");
+  const axiosPublic=useAxiosPublic()
 const {user}=UseAuthContext()
 
    const { data:bookings, isLoading, error, refetch } = UseFetching('get',
@@ -13,7 +15,8 @@ const {user}=UseAuthContext()
   );
 
   const handleStatus=async(text,id)=>{
-    await UseFetching("patch",`/booking/${id}`,text)
+    console.log(text)
+    await axiosPublic.patch(`/booking/${id}`,{status:text})
     refetch()
  
   }
@@ -77,11 +80,18 @@ if(isLoading) return <Loading/>
   booking.status==='Pending' &&(
 <div className="mt-4 flex gap-2">
     <button onClick={()=>handleStatus("Cancelled",booking._id)} className="btn btn-sm bg-red-500 text-white">Cancel</button>
-    <button className="btn btn-sm bg-blue-500 text-white">Rebook</button>
+  
   </div>
   )
 }
+  {
+      booking.status==='Cancelled' &&(
+<div className="mt-4 flex gap-2">
+      <button onClick={()=>handleStatus("Pending",booking._id)} className="btn btn-sm bg-blue-500 text-white">Rebook</button>
   
+  </div>
+  )
+  }
 </div>
 
             ))}
@@ -121,25 +131,6 @@ if(isLoading) return <Loading/>
       }
  
 
-    
-      {/* Cancelled → Timeline Style */}
-      {activeTab === "cancelled" && (
-        <div className="relative border-l-2 border-red-500 pl-6 space-y-6">
-          {bookings
-            .filter((b) => b.status === "Cancelled")
-            .map((booking) => (
-              <div key={booking.id}>
-                <h4 className="font-bold">
-                  {booking.date} • {booking.time}
-                </h4>
-                <p>Table #{booking.table}, Guests: {booking.guests}</p>
-                <span className="text-red-600 font-semibold">
-                  {booking.status}
-                </span>
-              </div>
-            ))}
-        </div>
-      )}
     </div>
   );
 };
