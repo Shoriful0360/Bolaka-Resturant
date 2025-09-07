@@ -18,8 +18,6 @@ const CheckoutForm = () => {
     const{user}=UseAuthContext()
 const axiosSecure=useAxiosSecure()
 const[cart,refetch,isLoading]=useCards()
-
-console.log('cart',cart,isLoading)
 const totalPrice=cart.reduce((total,item)=>total + item.price,0)
 
     useEffect(()=>{

@@ -4,16 +4,47 @@ import UseAuthContext from "../../../hook/UseAuthContext";
 import UseFetching from "../../../hooks/useFetching";
 import Loading from "../../../component/Loading";
 import useAxiosPublic from "../../../hook/useAxiosPublic";
+import ReviewModal from "../../../component/modal/ReviewModal";
+import UserInfo from "../../../hook/UserInfo";
+import Swal from "sweetalert2";
 
 const MyBooking = () => {
   const [activeTab, setActiveTab] = useState("Pending");
   const axiosPublic=useAxiosPublic()
+    const [isModalOpen,setIsModalOpen]=useState(false)
 const {user}=UseAuthContext()
-
-   const { data:bookings, isLoading, error, refetch } = UseFetching('get',
+const [role]=UserInfo()
+const{name,image,designation}=role || {}
+   const { data:bookings, isLoading,  refetch } = UseFetching('get',
     `/booking/${user?.email}?status=${activeTab}`
   );
 
+  // add review
+
+const handleReview=async(reviewData)=>{
+    const newReview={
+      ...reviewData,
+      name:name,
+      image:image,
+      designation:designation
+    }
+
+    try {
+     const {data}= await axiosPublic.post('/review',newReview)
+     if(data.insertedId){
+      Swal.fire({
+  position: "top-center",
+  icon: "success",
+  title: "Thank you giving review",
+  showConfirmButton: false,
+  timer: 1500
+});
+     }
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+  // status change
   const handleStatus=async(text,id)=>{
     console.log(text)
     await axiosPublic.patch(`/booking/${id}`,{status:text})
@@ -43,7 +74,8 @@ if(isLoading) return <Loading/>
             {tab}
           </button>
         ))}
-      </div>   {/* Upcoming → Card Style */}
+      </div>   
+      {/* Upcoming/pending/cancelled→ Card Style */}
 
       {
         activeTab==="Pending" ||activeTab==="Upcoming" || activeTab==="Cancelled" ?
@@ -98,6 +130,7 @@ if(isLoading) return <Loading/>
         </div>
         :
 
+        // complete status
  <div className="overflow-x-auto  flex flex-col">
           <table className="table w-full border">
             <thead className="bg-gray-100">
@@ -119,7 +152,7 @@ if(isLoading) return <Loading/>
                     <td>{booking.table}</td>
                     <td className="text-gray-500">{booking.status}</td>
                     <td>
-                      <button className="btn btn-xs bg-blue-500 text-white">
+                      <button onClick={()=>setIsModalOpen(true)} className="btn btn-xs bg-blue-500 text-white">
                         Review
                       </button>
                     </td>
@@ -130,7 +163,7 @@ if(isLoading) return <Loading/>
         </div>
       }
  
-
+  <ReviewModal isOpen={isModalOpen} onSubmit={handleReview} onClose={()=>setIsModalOpen(false)}/>
     </div>
   );
 };
