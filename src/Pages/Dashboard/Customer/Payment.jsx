@@ -8,7 +8,7 @@ import Ssl_payment from "../../../component/payment/Ssl_payment";
 const stripePromise=loadStripe(import.meta.env.  VITE_STRIPE_KEY)
 const Payment = () => {
   const [paymentMethod,setPaymentMethod]=useState('stripe')
-  console.log(paymentMethod)
+ 
     return (
         <div>
           <SectionTitle heading={'Payment'} subHeading={" Please Pay to eat"}></SectionTitle>  

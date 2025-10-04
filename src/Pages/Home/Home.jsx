@@ -33,13 +33,13 @@ if(isLoading) return <Loading/>
               <h2 className="text-3xl font-bold text-center underline underline-offset-8 text-gray-800 mb-10">
           What customer Says
         </h2>
-        <Marquee>
- <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <Marquee pauseOnHover autoFill className="flex">
+
         {
             reviews?.map((review)=>  <TestiMonials key={review._id} review={review}/>)
         }
        
-       </div>
+    
 
         </Marquee>
       

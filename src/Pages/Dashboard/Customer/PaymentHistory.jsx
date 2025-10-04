@@ -17,7 +17,7 @@ const {data:paymentHistory=[],isLoading}=useQuery({
         return data
     }
 })
-console.log(paymentHistory)
+
 if(isLoading) return <Loading></Loading>
 
 
@@ -27,20 +27,20 @@ if(isLoading) return <Loading></Loading>
         <SectionTitle heading={'payment history'} subHeading={'At a Glancel'}></SectionTitle>
         </div>
        <div className="">
-       <h1 className="text-3xl uppercase font-semibold">Total Payment: ({paymentHistory.length})</h1>
+       <h1 className="text-3xl uppercase font-semibold my-4">Total Payment: ({paymentHistory.length})</h1>
   
        </div>
        {/* table */}
        <div className="overflow-x-auto ">
-  <table className="table bg-orange-300 ">
+  <table className="table  ">
     {/* head */}
-    <thead className="rouded-md">
+    <thead className="rouded-md bg-orange-400">
       <tr className="text-base uppercase text-white ">
         <th>
         
         </th>
         <th>Email</th>
-        <th>category</th>
+        <th>Name</th>
         <th>total price </th>
         <th>payment date</th>
         <th>Transaction id</th>
@@ -58,9 +58,7 @@ if(isLoading) return <Loading></Loading>
         <td>
          {item.email}
         </td>
-        <td>
-        Food Order
-        </td>
+        <td>{item.name}</td>
         <td>${item.price}</td>
         <td>{item.date}</td>
      <td>{item.transactionId}</td>

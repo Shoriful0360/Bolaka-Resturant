@@ -38,8 +38,26 @@ const AllUsers = () => {
 
     // delet user
     const handleDelet=async(id)=>{
-await axios.delete(`${import.meta.env.VITE_URL}/users/${id}`)
+      Swal.fire({
+  title: "Are you sure?",
+  text: "You won't be able to revert this!",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#3085d6",
+  cancelButtonColor: "#d33",
+  confirmButtonText: "Yes, delete it!"
+}).then(async(result)=> {
+  if (result.isConfirmed) {
+    await axios.delete(`${import.meta.env.VITE_URL}/users/${id}`)
 refetch()
+    Swal.fire({
+      title: "Deleted!",
+      text: "Your file has been deleted.",
+      icon: "success"
+    });
+  }
+});
+
 
     }
 
@@ -63,12 +81,9 @@ await AxiosSecure.patch(`/users/admin/${id}`)
     }
 
     return (
-        <div>
-       <div className='flex justify-evenly'>
-       <h1>All Users</h1>
-       <h1>Total Users</h1>
-       </div>
-       <div className="overflow-x-auto">
+
+   
+       <div className="overflow-x-auto mt-10">
   <table className="table bg-orange-400">
     {/* head */}
     <thead >
@@ -84,11 +99,9 @@ await AxiosSecure.patch(`/users/admin/${id}`)
     </thead>
     <tbody className="bg-white">
         {
-            users?.map(user=><tr key={user._id}>
+            users?.map((user,idx)=><tr key={user._id}>
                   <th>
-                    <label>
-                      <input type="checkbox" className="checkbox" />
-                    </label>
+                 {idx +1}
                   </th>
                   <td>
                     <div className="flex items-center gap-3">
@@ -129,7 +142,7 @@ await AxiosSecure.patch(`/users/admin/${id}`)
  
   </table>
 </div>
-        </div>
+    
     );
 };
 

@@ -30,13 +30,7 @@ const FoodCard = ({item}) => {
      .then((res)=>{
 
       if(res.data.insertedId){
-        Swal.fire({
-          position: "top-center",
-          icon: "success",
-          title: `${name} added to your card`,
-          showConfirmButton: false,
-          timer: 1500
-        });
+    
         toast.success('success add to cart')
         refetch()
       }

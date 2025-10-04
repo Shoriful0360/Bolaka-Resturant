@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 const OurMenu = () => {
     const[menues]=useMenu()
-    console.log(menues)
+
     const popular=menues?.filter(item=>item.category==='popular')
  
 

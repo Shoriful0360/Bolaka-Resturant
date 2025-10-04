@@ -24,7 +24,7 @@ const totalPrice=cart.reduce((total,item)=>total + item.price,0)
 if(totalPrice>0){
     axiosSecure.post('/create-payment',{price:totalPrice})
 .then(res=>{
-    console.log(res.data.clientSecret)
+
     setClientSecret(res.data.clientSecret)
 })
 }
@@ -44,11 +44,11 @@ if(totalPrice>0){
             card
         })
         if(error){
-            console.log('payment error',error)
+       
 
             setError(error.message)
         }else{
-            console.log('payment success',paymentMethod)
+          
             setError('')
         }
 
@@ -63,10 +63,7 @@ if(totalPrice>0){
             }
         })
 
-        if(confirmError){
-            console.log('confirmError',confirmError)
-        }else{
-            console.log('paymentIntents',paymentIntent)
+            
             if(paymentIntent.status ==='succeeded'){
                 setTransactionId(paymentIntent.id)
                 toast.success('Payment have been succeeded')
@@ -87,7 +84,7 @@ if(totalPrice>0){
 
                 await axiosSecure.post('/payment',payment)
                 .then(res=>{
-                    console.log(res.data)
+                   
                     if(res.data.insertedId){
                         toast.success('Thank you for pay order')
                         refetch()
@@ -96,7 +93,7 @@ if(totalPrice>0){
             }
 
         
-        }
+    
         
     }
     return (

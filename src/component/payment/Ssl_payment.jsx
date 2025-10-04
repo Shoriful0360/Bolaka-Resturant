@@ -8,9 +8,9 @@ const Ssl_payment = () => {
     const[cart,refetch,isLoading]=useCards()
 const totalPrice=cart.reduce((total,item)=>total + item.price,0)
 const axiosSecure=useAxiosSecure()
-console.log(totalPrice)
+
      const handleCreatePayment=async()=>{
-        console.log('hai')
+
                    const payment={
                     name:user?.displayName,
                      email:user?.email,
@@ -25,15 +25,15 @@ console.log(totalPrice)
                    if(response.data?.gatewayUrl){
                     window.location.replace(response?.data?.gatewayUrl)
                    }
-                 console.log('response',response)
+
                 }
     return (
         <div className="mt-10 space-y-3">
           <h1 className="text-xl font-bold">Payment Details :</h1>
           <p>Complete your order by providing your payment details</p>  
-          <input type="text" placeholder="Enter your email" className="input input-bordered" />
+       
          <br />
-          <button onClick={handleCreatePayment} className="btn btn-info text-white">Place Holder</button>
+          <button onClick={handleCreatePayment} className="btn btn-info text-white">Next</button>
         </div>
     );
 };

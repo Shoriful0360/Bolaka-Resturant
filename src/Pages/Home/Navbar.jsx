@@ -13,7 +13,7 @@ const Navbar = () => {
   const { user, logoutUser, loading } = UseAuthContext();
   const [role, isLoading] = UserInfo();
   const [cart] = useCards()
-  console.log('lastScrooly',lastScrolly)
+
 
   useEffect(()=>{
     const handleScroll=()=>{
@@ -70,60 +70,89 @@ const Navbar = () => {
   );
 
   return (
-    <div className={`fixed top-0 left-0 z-50 w-full bg-white/40 backdrop-blur-md  shadow-md transition-transform duration-300 ${
+  <div
+      className={`fixed top-0 left-0 z-50 w-full bg-white/30 backdrop-blur-lg shadow-md 
+      transition-transform duration-500 ${
         show ? "translate-y-0" : "-translate-y-full"
-      }`}>
-      <div className="navbar px-4 sm:px-10 ">
-        <div className="navbar-start ">
+      }`}
+    >
+      <div className="navbar px-4 sm:px-8 md:px-12 lg:px-16">
+        {/* ==== Left: Hamburger + Brand ==== */}
+        <div className="navbar-start flex items-center gap-3">
           {/* Mobile dropdown */}
-          <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+          <div className="dropdown lg:hidden">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost hover:bg-white/20 rounded-xl"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
+                className="h-6 w-6 text-orange-500"
                 fill="none"
                 viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" 
-                  d="M4 6h16M4 12h8m-8 6h16" />
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h8m-8 6h16"
+                />
               </svg>
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content text-orange-500 bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+              className="menu menu-sm dropdown-content text-orange-600 bg-white/90 
+              rounded-2xl z-[1] mt-3 w-52 p-3 shadow-lg border border-orange-200"
+            >
               {link}
             </ul>
           </div>
 
           {/* Brand */}
-          <div className="flex flex-col">
-          <Link 
-  to="/" 
-  className="text-md md:text-2xl lg:text-xl xl:text-4xl font-extrabold bg-gradient-to-r from-red-500 via-yellow-500 to-green-500 bg-clip-text text-transparent"
->
- <span className="text-2xl md:text-4xl lg:text-3xl xl:text-5xl italic"> B</span>olaka <span className="text-xl lg:text-3xl xl:text-5xl italic">R</span>esturant
-</Link>
-
-          </div>
+          <Link
+            to="/"
+            className="flex items-center font-extrabold bg-gradient-to-r from-red-500 via-yellow-500 to-green-500 
+            bg-clip-text text-transparent tracking-wide"
+          >
+            <span className="text-2xl md:text-3xl lg:text-4xl italic">B</span>
+            <span className="text-lg md:text-xl lg:text-2xl ml-1">olaka</span>
+            <span className="text-xl md:text-2xl lg:text-4xl italic ml-1">R</span>
+            <span className="text-lg md:text-xl lg:text-2xl ml-1">esturant</span>
+          </Link>
         </div>
 
-        {/* Center Nav */}
+        {/* ==== Center Nav (desktop only) ==== */}
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1 text-orange-300 font-bold">
+          <ul className="menu menu-horizontal gap-6 px-1 text-orange-600 font-semibold tracking-wide">
             {link}
           </ul>
         </div>
 
-        {/* Right */}
-        <div className="navbar-end">
+        {/* ==== Right: Login/Logout ==== */}
+        <div className="navbar-end gap-2">
           {user ? (
-            <button onClick={logoutUser} className="btn">LogOut</button>
+            <button
+              onClick={logoutUser}
+              className="btn btn-sm md:btn-md bg-orange-500 text-white border-none 
+              hover:bg-orange-600 rounded-full px-5"
+            >
+              Log Out
+            </button>
           ) : (
-            <NavLink to="/login" className="btn">Log In</NavLink>
+            <NavLink
+              to="/login"
+              className="btn btn-sm md:btn-md bg-gradient-to-r from-orange-400 to-red-500 text-white 
+              border-none hover:from-orange-500 hover:to-red-600 rounded-full px-5"
+            >
+              Log In
+            </NavLink>
           )}
         </div>
       </div>
     </div>
+
   );
 };
 

@@ -36,7 +36,7 @@ if(isLoading) return <Loading/>
 });
      }
     } catch (error) {
-      console.log(error.message)
+   alert(error.message)
     }
   }
   return (

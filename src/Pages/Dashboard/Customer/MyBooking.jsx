@@ -41,12 +41,13 @@ const handleReview=async(reviewData)=>{
 });
      }
     } catch (error) {
-      console.log(error.message)
+      alert(error.message)
+     
     }
   }
   // status change
   const handleStatus=async(text,id)=>{
-    console.log(text)
+  
     await axiosPublic.patch(`/booking/${id}`,{status:text})
     refetch()
  

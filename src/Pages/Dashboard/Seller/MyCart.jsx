@@ -7,7 +7,7 @@ import useAxiosPublic from "../../../hook/useAxiosPublic";
 import{toast} from "react-hot-toast"
 const MyCart = () => {
     const [cart]=useCards()
-    console.log("from cart",cart)
+
 const totalPrice=cart.reduce((prev,item)=>prev+item.price,0)
 const axiosSecure=useAxiosPublic()
 
