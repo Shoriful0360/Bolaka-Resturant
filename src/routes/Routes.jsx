@@ -23,6 +23,7 @@ import MyBooking from "../Pages/Dashboard/Customer/MyBooking";
 import Contact from "../Pages/Dashboard/Customer/Contact";
 import ManageBooking from "../Pages/Dashboard/Admin/ManageBooking";
 import TableBooking from "../Pages/booking/TableBooking";
+import AboutUs from "../Pages/about us/AboutUs";
 // import MyCart from "../Pages/Dashboard/Admin/Seller/MyCart";
 
 
@@ -54,6 +55,10 @@ export const router = createBrowserRouter([
     {
         path:"/booking",
         element:<TableBooking/>
+    },
+    {
+        path:"/about",
+        element:<AboutUs/>
     }
           
         ]
