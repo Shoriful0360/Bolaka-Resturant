@@ -10,9 +10,9 @@ const Cover = ({img,title,subtitle}) => {
       strength={-200}
       
   >
-       <div>
+       
           <div
-  className="hero h-[600px]"
+  className="hero h-[400px] sm:h-[600px]"
  >
   <div className="hero-overlay bg-opacity-60"></div>
   <div className="hero-content text-neutral-content text-center">
@@ -25,7 +25,7 @@ const Cover = ({img,title,subtitle}) => {
     </div>
   </div>
 </div>  
-        </div>
+       
   </Parallax>
       
     );

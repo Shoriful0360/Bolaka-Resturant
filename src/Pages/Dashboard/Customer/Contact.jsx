@@ -22,7 +22,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen bg-base-100 p-8">
+    <div className="min-h-[100dvh]bg-base-100 p-8 mt-20">
       <Helmet>
         <title>Bolaka Restaurant | Contact Us</title>
       </Helmet>

@@ -67,16 +67,8 @@ const Dashboard = () => {
 
         {/* Main content */}
         <div className="flex-1 overflow-y-auto  mt-20 sm:mt-10 ">
-          {/* header */}
-          <div className="navbar shadow-md justify-between pt-10 lg:pt-0 ">
-  <div className="">
-    <a className="btn btn-ghost text-xl">Dashboard</a>
-  </div>
-  <div className="">
-    <input type="text" placeholder="Search for anything" className="input input-bordered  lg:w-72" />
-  
-  </div>
-</div>
+        
+
           <Outlet />
         </div>
       </div>
