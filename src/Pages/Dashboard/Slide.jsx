@@ -48,11 +48,11 @@ const Slide = ({ handleClose }) => {
 
         {
           role?.role === "Customer" && <>
-            <li><NavLink to={'/dashboard/user_home'}><MdDashboard /> Dashboard</NavLink> </li>
-            <li><NavLink to="/dashboard/reservation"> <MdOutlineDateRange /> reservation</NavLink></li>
-            <li><NavLink to={"/dashboard/payment_history"}><RiSecurePaymentFill />payment history</NavLink></li>
-            <li><NavLink to="/dashboard/my_cart"><FaCartArrowDown />Add To cart</NavLink></li>
-            <li><NavLink to="my_booking"><TbBrandBooking />my booking</NavLink></li>
+            <li onClick={handleClose}><NavLink to={'/dashboard/user_home'}><MdDashboard /> Dashboard</NavLink> </li>
+            <li onClick={handleClose}><NavLink to="/dashboard/reservation"> <MdOutlineDateRange /> reservation</NavLink></li>
+            <li onClick={handleClose}><NavLink to={"/dashboard/payment_history"}><RiSecurePaymentFill />payment history</NavLink></li>
+            <li onClick={handleClose}><NavLink to="/dashboard/my_cart"><FaCartArrowDown />Add To cart</NavLink></li>
+            <li onClick={handleClose}><NavLink to="my_booking"><TbBrandBooking />my booking</NavLink></li>
 
             <li onClick={handleClose}><NavLink to="contact"><MdContactPhone />contact</NavLink></li>
           </>

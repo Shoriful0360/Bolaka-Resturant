@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { auth } from "../firebase/firebase.init";
 import { GoogleAuthProvider } from "firebase/auth";
 import axios from "axios";
@@ -29,6 +29,13 @@ return signInWithEmailAndPassword(auth,email,password)
 const createUser=(email,password)=>{
     setLoading(true)
     return createUserWithEmailAndPassword(auth,email,password)
+}
+
+// reset password
+const resetPassword=(email)=>{
+  
+    setLoading(true)
+    return sendPasswordResetEmail(auth,email)
 }
 
 
@@ -94,7 +101,7 @@ return ()=>{
 },[])
 
 const authInfo={
-    loginWithGoogle,loginEmail,createUser,user,logoutUser,updateUserProfile,loading
+    loginWithGoogle,loginEmail,createUser,user,logoutUser,updateUserProfile,loading,resetPassword,setLoading
 }
 
     return (
